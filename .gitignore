@@ -1,0 +1,22 @@
+# Package file
+*.jar
+*.war
+*.ear
+
+# macOS template
+*.DS_Store
+
+# IntelliJ project files
+.idea
+.idea/*.xml
+*.iml
+build
+out
+
+# Compiled files
+/target
+**/target
+
+# Gradle
+.gradle
+/build/
