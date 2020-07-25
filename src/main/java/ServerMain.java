@@ -7,6 +7,7 @@ import com.linecorp.armeria.server.annotation.Get;
 import com.linecorp.armeria.server.annotation.Param;
 import com.linecorp.armeria.server.annotation.Produces;
 import com.linecorp.armeria.server.logging.LoggingService;
+import user.UserService;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -16,18 +17,7 @@ public class ServerMain {
         sb.http(8080);
 
         sb.service("/", (ctx, req) -> HttpResponse.of("Hello world"));
-
-        sb.annotatedService(new Object() {
-            @Get("/users")
-            public HttpResponse getUsers() {
-                return HttpResponse.of("Hello get users");
-            }
-
-            @Get("/users/:id")
-            public HttpResponse getUser(@Param("id") String id) {
-                return HttpResponse.of("Hello User num %s", id);
-            }
-        });
+        sb.annotatedService(new UserService());
 
         Server server = sb.build();
         CompletableFuture<Void> future = server.start();
